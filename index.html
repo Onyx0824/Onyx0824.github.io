@@ -204,6 +204,59 @@
       transform: translateY(-4px);
     }
 
+    #experience {
+      padding: 60px 20px;
+      background: linear-gradient(to bottom right, #f9ece6, #f7efe7);
+    }
+    
+    #experience .section-title {
+      text-align: center;
+      font-size: 32px;
+      color: #444;
+      margin-bottom: 40px;
+      user-select: none;
+    }
+    
+    .exp-card-container {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      max-width: 900px;
+      margin: auto;
+    }
+    
+    .exp-card {
+      background-color: #fffaf5;
+      border-radius: 16px;
+      box-shadow: 0 4px 10px rgba(100, 80, 70, 0.1);
+      padding: 30px 25px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .exp-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 18px rgba(100, 80, 70, 0.15);
+    }
+    
+    .exp-card h3 {
+      margin-top: 0;
+      font-size: 24px;
+      color: #b86f52;
+      margin-bottom: 15px;
+      user-select: none;
+    }
+    
+    .exp-card ul {
+      padding-left: 20px;
+      list-style-type: disc;
+      color: #444;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+    
+    .exp-card ul li {
+      margin-bottom: 0.8rem;
+    }
 
     /* footer */
     footer {
@@ -299,7 +352,7 @@
     </section>
 
     <section id="projects">
-      <h2>作品與經歷</h2>
+      <h2>作品</h2>
       <ul>
         <li><a href="https://sitcon.org/" target="_blank">SITCON 工作人員（直播與剪輯技術）</a></li>
         <li><a href="https://coscup.org/" target="_blank">COSCUP 工作人員（技術導播）</a></li>
@@ -308,6 +361,70 @@
       </ul>
     </section>
 
+    <section id="experience">
+      <h2 class="section-title">經歷</h2>
+      <div class="exp-card-container">
+        <!-- 2025 -->
+        <div class="exp-card">
+          <h3>2025</h3>
+          <ul>
+            <li><strong>SITCON 2025 工作人員</strong>：製播成像組、技術支援、影片剪輯</li>
+            <li><strong>COSCUP 2025 工作人員</strong>：技術支援與後製剪輯</li>
+            <li><strong>ATCC 全國大專校院商業個案競賽</strong>：晉級初賽第一輪（2025.03－2025.04）</li>
+            <li><strong>ICIM 論文發表</strong>：比較多種統計模型與深度學習模型於 PM2.5 預測（2025.03）</li>
+            <li><strong>國科會大專學生研究計畫主持人</strong>：
+              探討元宇宙創業意向之影響因素：兼論虛擬實境教育的調節效果（2024.07－NOW，八項全 A，整體前 20%）
+            </li>
+            <li><strong>學生議會</strong>：第二十九屆資訊管理學系系議員（2025.08－2026.07）</li>
+            <li><strong>學生權益委員會</strong>：召集委員（2025.08－2026.07）</li>
+            <li><strong>學生會學權部</strong>：第二十九屆顧問（2025.08－2026.07）</li>
+          </ul>
+        </div>
+    
+        <!-- 2024 -->
+        <div class="exp-card">
+          <h3>2024</h3>
+          <ul>
+            <li><strong>永續黑客松競賽</strong>：獲佳作（2024.04－2024.12）</li>
+            <li><strong>AI CUP 2024 秋季賽</strong>：進入前 8%（2024.08－2024.10）</li>
+            <li><strong>PicoPi 乎你知專題</strong>：自建 NAS 系統（Nginx + uWSGI + Flask）（2024.11－NOW）</li>
+            <li><strong>學生會學權部</strong>：第28屆部長（2024.08－2025.07）</li>
+            <li><strong>學生議會</strong>：第二十七屆秘書處議事組成員（2023.08－2024.07）</li>
+            <li><strong>系學會幹部</strong>：第24屆資訊股股長，主辦電競週與多場活動（2024.08－2025.07）</li>
+            <li><strong>宿舍幹部</strong>：第九宿舍樓長與女總幹事（2024－NOW）</li>
+            <li><strong>教學助理 ×3</strong>：人工智慧及其應用 ×2、生命探索與實踐 ×1（2024－NOW）</li>
+          </ul>
+        </div>
+    
+        <!-- 2023 -->
+        <div class="exp-card">
+          <h3>2023</h3>
+          <ul>
+            <li><strong>建置系上考古題網站</strong>：Apache + PHP、部分 HTML（2023.06－2025.06）</li>
+            <li><strong>學生會網站維運與更新</strong>：使用 rPage（2023.06－NOW）</li>
+            <li><strong>協助校方建置新生專屬網站</strong>：使用 ePage（2023.09－2023.12）</li>
+            <li><strong>課程課代 ×4</strong>：C++、電子商務、向量繪圖設計、人工智慧與大數據之管理應用（2022－NOW）</li>
+            <li><strong>學生會學權部</strong>：第27屆副部長 → 代理部長（2023.08－2024.07）</li>
+            <li><strong>學生申訴評議委員會、霸凌防治委員會、人行道協調小組</strong>：委員職務（2023－2025）</li>
+            <li><strong>新生輔導員</strong>：資訊管理系116級（2023.08）</li>
+          </ul>
+        </div>
+    
+        <!-- 2022 -->
+        <div class="exp-card">
+          <h3>2022</h3>
+          <ul>
+            <li><strong>就讀國立彰化師範大學資訊管理學系</strong>：系排名第七；書卷獎 ×1，校外獎學金 ×6（臺電公司三年、高雄總工會、郵局）</li>
+            <li><strong>宿舍幹部</strong>：第九宿舍樓長與女總幹事（2024－NOW）</li>
+            <li><strong>學生會學權部</strong>：第26屆部員（2022.08－2023.07）</li>
+            <li><strong>系隊女排球經理</strong>：2022－2025，連續三年</li>
+            <li><strong>班級幹部</strong>：歷任副代表（2022－NOW）</li>
+            <li><strong>校方 PA 工讀生</strong>：負責影像、音控、直播、導播、後製剪輯（2023－NOW）</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    
     <section id="contact" class="contact">
       <h2>聯絡我</h2>
       <p>📧 Email：chenyuxin821@gmail.com</p>
