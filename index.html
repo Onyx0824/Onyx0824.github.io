@@ -213,7 +213,7 @@
     <header>
       <img src="images/avatar.jpg" alt="大頭貼" />
       <h1>陳毓欣</h1>
-      <p>國立彰化師範大學 資訊管理學系 | 系排名第七</p>
+      <p>國立彰化師範大學 資訊管理學系 | 累積系排名第七</p>
     </header>
 
     <section id="about">
@@ -285,6 +285,12 @@
         if (window.scrollY >= sectionTop) {
           current = section.getAttribute('id');
         }
+      });
+      navItems.forEach(link => {
+        link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        navLinks.classList.remove('open');
+        });
       });
       navItems.forEach(link => {
         link.classList.remove('active');
