@@ -185,6 +185,25 @@
     .contact p {
       margin: 0.5rem 0;
     }
+    .card-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+    
+    .skill-card {
+      background-color: #fff9f6dd;
+      border: 1px solid #e7cfc3;
+      border-radius: 16px;
+      padding: 1.2rem 1.5rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      transition: transform 0.2s ease;
+    }
+    
+    .skill-card:hover {
+      transform: translateY(-4px);
+    }
+
 
     /* footer */
     footer {
