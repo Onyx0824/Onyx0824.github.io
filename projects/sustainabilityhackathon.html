@@ -284,6 +284,63 @@
       object-fit: cover;
     }
 
+    .slideshow-container {
+      max-width: 800px;
+      margin: 2rem auto;
+      position: relative;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    
+    .slide {
+      display: none;
+    }
+    
+    .slide img {
+      width: 100%;
+      border-radius: 8px;
+      object-fit: cover;
+    }
+    
+    /* 淡入淡出動畫 */
+    .fade {
+      animation-name: fade;
+      animation-duration: 1s;
+    }
+    
+    @keyframes fade {
+      from { opacity: 0.4; }
+      to { opacity: 1; }
+    }
+    
+    /* 控制按鈕樣式 */
+    .prev, .next {
+      cursor: pointer;
+      position: absolute;
+      top: 50%;
+      padding: 16px;
+      color: white;
+      font-weight: bold;
+      font-size: 24px;
+      user-select: none;
+      transition: 0.3s;
+      background-color: rgba(0,0,0,0.3);
+      border-radius: 50%;
+      transform: translateY(-50%);
+    }
+    
+    .prev:hover, .next:hover {
+      background-color: rgba(0,0,0,0.6);
+    }
+    
+    .prev {
+      left: 10px;
+    }
+    
+    .next {
+      right: 10px;
+    }
+
     /* footer */
     footer {
       text-align: center;
@@ -327,10 +384,21 @@
       <p>培養跨領域合作、永續思維與創新解決問題能力</p>
 
       <p style="text-align:center; color:#888; font-size:0.95rem;">※ 本文件僅供瀏覽，請勿分享或侵占作者權益 ※</p>
-      <div class="image-gallery">
-        <img src="../assets/sustainabilityhackathon1.png" alt="sustainabilityhackathon 圖片 1" />
-        <img src="../assets/sustainabilityhackathon2.jpg" alt="sustainabilityhackathon 圖片 2" />
-        <img src="../assets/sustainabilityhackathon3.jpg" alt="sustainabilityhackathon 圖片 3" />
+      <div class="slideshow-container">
+        <!-- 幻燈片圖片 -->
+        <div class="slide fade">
+          <img src="../assets/nstc-photo1.jpg" alt="圖片1">
+        </div>
+        <div class="slide fade">
+          <img src="../assets/nstc-photo2.jpg" alt="圖片2">
+        </div>
+        <div class="slide fade">
+          <img src="../assets/nstc-photo3.jpg" alt="圖片3">
+        </div>
+      
+        <!-- 控制按鈕 -->
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
       </div>
   
       <div class="back-link">
@@ -356,6 +424,24 @@
         navbar.classList.remove('scrolled');
       }
     });
+
+    let slideIndex = 1;
+    showSlides(slideIndex);
+  
+    function plusSlides(n) {
+      showSlides(slideIndex += n);
+    }
+  
+    function showSlides(n) {
+      const slides = document.getElementsByClassName("slide");
+      if (n > slides.length) { slideIndex = 1; }
+      if (n < 1) { slideIndex = slides.length; }
+  
+      for (let i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+      }
+      slides[slideIndex - 1].style.display = "block";
+    }
   </script>
 </body>
 </html>
