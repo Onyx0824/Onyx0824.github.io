@@ -204,6 +204,21 @@
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 1.5rem;
     }
+
+    .pdf-container {
+      width: 100%;
+      max-width: 800px;
+      margin: 2rem auto;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+  
+    .pdf-container embed {
+      width: 100%;
+      height: 600px;
+      border: none;
+    }
     
     .skill-card {
       background-color: #fff9f6dd;
@@ -284,15 +299,15 @@
 
   <!-- 內容主卡片 -->
   <div class="container">
-    <section id="about">
+    <section id="nstc">
       <h2>國科會研究計畫</h2>
       <p>探討元宇宙創業意向之影響因素：兼論虛擬實境教育的調節效果</p>
       <p>本計畫獲得國科會八項全 A 評等，聚焦於 VR 教育對創業行為意圖的調節作用。</p>
-
+  
       <div class="pdf-container">
         <embed src="../assets/nstc-project.pdf" type="application/pdf" />
       </div>
-
+  
       <div class="back-link">
         <a href="../index.html">← 返回首頁</a>
       </div>
