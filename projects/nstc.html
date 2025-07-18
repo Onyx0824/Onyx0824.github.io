@@ -262,27 +262,27 @@
 </head>
 <body>
 
+  <!-- 導覽列 -->
   <nav id="navbar">
     <div class="nav-container">
       <a href="../index.html" class="nav-logo">
         <img src="../images/logo.png" alt="logo" />
       </a>
       <div class="nav-links" id="navLinks">
-        <a href="../index.html/#about" class="nav-link">關於我</a>
-        <a href="../index.html/#skills" class="nav-link">技能</a>
-        <a href="../index.html/#projects" class="nav-link">作品</a>
-        <a href="../index.html/#language" class="nav-link">語言能力</a>
-        <a href="../index.html/#experience" class="nav-link">經歷</a>
-        <a href="../index.html/#contact" class="nav-link">聯絡我</a>
+        <a href="../index.html/#about">關於我</a>
+        <a href="../index.html/#skills">技能</a>
+        <a href="../index.html/#projects">作品</a>
+        <a href="../index.html/#language">語言能力</a>
+        <a href="../index.html/#experience">經歷</a>
+        <a href="../index.html/#contact">聯絡我</a>
       </div>
       <div class="hamburger" id="hamburger">
-        <div></div>
-        <div></div>
-        <div></div>
+        <div></div><div></div><div></div>
       </div>
     </div>
   </nav>
-  
+
+  <!-- 內容主卡片 -->
   <div class="container">
     <div class="card">
       <h1>國科會研究計畫</h1>
@@ -299,5 +299,23 @@
     </div>
   </div>
 
+  <!-- 漢堡選單功能 -->
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      navLinks.classList.toggle('open');
+    });
+
+    window.addEventListener('scroll', () => {
+      const navbar = document.getElementById('navbar');
+      if (window.scrollY > 20) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+  </script>
 </body>
 </html>
