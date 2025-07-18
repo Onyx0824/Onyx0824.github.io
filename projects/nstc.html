@@ -6,9 +6,9 @@
   <title>NSTC 國科會計畫</title>
   <style>
     body {
-      font-family: 'Noto Sans TC', sans-serif;
       margin: 0;
-      padding: 2rem;
+      padding: 0;
+      font-family: 'Noto Sans TC', sans-serif;
       background-color: #fffaf7;
       color: #333;
       display: flex;
@@ -16,20 +16,30 @@
       align-items: center;
     }
 
+    .container {
+      max-width: 900px;
+      width: 100%;
+      padding: 2rem 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
     .card {
       background-color: #ffffff;
       border-radius: 16px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
       padding: 2rem;
-      max-width: 900px;
-      width: 100%;
-      margin: 1rem auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     .card h1 {
-      text-align: center;
+      margin-top: 0;
       color: #9f6b53;
-      margin-bottom: 1rem;
+      font-size: 1.8rem;
+      text-align: center;
     }
 
     .card p {
@@ -39,7 +49,8 @@
     }
 
     .pdf-container {
-      margin-top: 2rem;
+      width: 100%;
+      margin-top: 1.5rem;
       border: 1px solid #ccc;
       border-radius: 8px;
       overflow: hidden;
@@ -51,35 +62,37 @@
       border: none;
     }
 
-    .back-btn {
-      margin-top: 1rem;
+    .back-link {
       text-align: center;
+      margin-top: 1rem;
     }
 
-    .back-btn a {
-      color: #9f6b53;
+    .back-link a {
       text-decoration: none;
-      font-size: 0.95rem;
+      color: #9f6b53;
+      font-weight: 500;
     }
 
-    .back-btn a:hover {
+    .back-link a:hover {
       text-decoration: underline;
     }
   </style>
 </head>
 <body>
 
-  <div class="card">
-    <h1>國科會研究計畫</h1>
-    <p>探討元宇宙創業意向之影響因素：兼論虛擬實境教育的調節效果</p>
-    <p>本計畫獲得國科會八項全 A 評等，聚焦於 VR 教育對創業行為意圖的調節作用。</p>
+  <div class="container">
+    <div class="card">
+      <h1>國科會研究計畫</h1>
+      <p>探討元宇宙創業意向之影響因素：兼論虛擬實境教育的調節效果</p>
+      <p>本計畫獲得國科會八項全 A 評等，聚焦於 VR 教育對創業行為意圖的調節作用。</p>
 
-    <div class="pdf-container">
-      <embed src="../assets/nstc-project.pdf" type="application/pdf" />
-    </div>
+      <div class="pdf-container">
+        <embed src="../assets/nstc-project.pdf" type="application/pdf" />
+      </div>
 
-    <div class="back-btn">
-      <a href="../index.html">← 返回首頁</a>
+      <div class="back-link">
+        <a href="../index.html">← 返回首頁</a>
+      </div>
     </div>
   </div>
 
