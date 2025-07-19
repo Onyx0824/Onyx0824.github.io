@@ -379,7 +379,7 @@
 
   <!-- 內容主卡片 -->
   <div class="container">
-    <section id="nstc">
+    <section id="aicup">
       <h2>區域微氣候資料預測發電量競賽｜排名前 8%</h2>
       <ul>
         <li>預測太陽能板未來發電量，資料涵蓋氣象站微氣候變數與歷史發電量</li>
@@ -391,25 +391,41 @@
       </ul>
 
       <p style="text-align:center; color:#888; font-size:0.95rem;">※ 本文件僅供瀏覽，請勿分享或侵占作者權益 ※</p>
-      <div class="slideshow-container">
-        <!-- 幻燈片圖片 -->
-        <div class="slide fade">
-          <img src="../assets/atcc1.jpg" alt="圖片1">
-        </div>
-        <div class="slide fade">
-          <img src="../assets/atcc2.jpg" alt="圖片2">
-        </div>
-        <div class="slide fade">
-          <img src="../assets/atcc3.jpg" alt="圖片3">
-        </div>
-        <div class="slide fade">
-          <img src="../assets/atcc4.jpg" alt="圖片4">
-        </div>
-      
-        <!-- 控制按鈕 -->
-        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-        <a class="next" onclick="plusSlides(1)">&#10095;</a>
-      </div>
+      <section class="exp-card">
+        <h3 style="color:#9f6b53;">參賽心得</h3>
+        <ul>
+          <li><strong>參賽過程與挑戰</strong>
+            <ul>
+              <li>遇到實際資料缺失、空值等課堂中少見的問題</li>
+              <li>初期策略為剔除空值，後續改採插值法與移動平均處理</li>
+              <li>嘗試避免高次插值造成負值，並排除重複數據</li>
+              <li>資料品質直接影響模型表現，需持續調整</li>
+            </ul>
+          </li>
+          <li><strong>模型與技術應用</strong>
+            <ul>
+              <li>使用 GRU、LSTM、RNN 等時間序列模型</li>
+              <li>實驗堆疊與雙向模型架構，並進行超參數微調</li>
+              <li>比賽後期發現其他隊伍多使用 CatBoost 等機器學習方法</li>
+              <li>未預期需外部資料補全，為未來改進重點</li>
+            </ul>
+          </li>
+          <li><strong>成果與反思</strong>
+            <ul>
+              <li>最終排名約在前 16%（82/500~600 組）</li>
+              <li>初次參賽經驗不足，策略需更多彈性與備案</li>
+              <li>與他人交流後獲得更多資料處理與建模靈感</li>
+            </ul>
+          </li>
+          <li><strong>收穫與未來方向</strong>
+            <ul>
+              <li>大幅提升資料處理能力與抗壓能力</li>
+              <li>希望未來參與更多競賽，累積實戰經驗</li>
+              <li>將精進模型選擇與特徵工程策略</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
   
       <div class="back-link">
         <a href="../index.html">← 返回首頁</a>
