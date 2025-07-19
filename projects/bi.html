@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BI 商業智慧</title>
+  <link rel="icon" href="images/favicon.png" type="../image/png" />
+  <style>
+    /* Reset & 基本樣式 */
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background: linear-gradient(90deg, #f9ece6, #f6e9de, #f7efe7);
+      margin: 0;
+      color: #333;
+      scroll-behavior: smooth;
+      padding-top: 80px; /* 避免 nav 蓋住內容 */
+    }
+
+    html, body {
+      overflow: auto;
+      -ms-overflow-style: none;  /* IE/Edge */
+      scrollbar-width: none;     /* Firefox */
+    }
+
+    body::-webkit-scrollbar, 
+    body::-webkit-scrollbar {
+      display: none;             /* Chrome/Safari */
+    }
+    
+    /* 導覽列 */
+    nav {
+      background-color: transparent;
+      position: fixed;
+      /*position: sticky;*/
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      transition: background-color 0.3s ease;
+      box-shadow: none;
+    }
+    nav.scrolled {
+      background-color: #d9c7bacc; /* 半透明莫蘭迪暖色 */
+      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    }
+    .nav-container {
+      max-width: 900px;
+      margin: auto;
+      padding: 0.8rem 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .nav-logo {
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: #6b4c3b;
+      text-decoration: none;
+      user-select: none;
+    }
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+    .nav-links a {
+      color: #6b4c3b;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+      cursor: pointer;
+    }
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: #ba6b57;
+    }
+    .nav-logo img {
+      height: 50px;
+      width: auto;
+    }
+
+    /* 漢堡選單按鈕 */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+    }
+    .hamburger div {
+      width: 25px;
+      height: 3px;
+      background-color: #6b4c3b;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+    /* 漢堡開啟動畫 */
+    .hamburger.active div:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+    .hamburger.active div:nth-child(2) {
+      opacity: 0;
+    }
+    .hamburger.active div:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+
+    /* 行動裝置導覽列 */
+    @media (max-width: 700px) {
+      .nav-links {
+        position: fixed;
+        top: 56px;
+        right: 0;
+        background-color: #f9ece6dd;
+        height: calc(100% - 56px);
+        width: 200px;
+        flex-direction: column;
+        padding: 2rem 1rem;
+        gap: 1rem;
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+        box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+        border-radius: 0 0 0 16px;
+        z-index: 999;
+      }
+      .nav-links.open {
+        transform: translateX(0);
+      }
+      .nav-links a {
+        font-size: 1.2rem;
+        color: #6b4c3b;
+      }
+      .hamburger {
+        display: flex;
+      }
+    }
+
+    /* 容器與卡片 */
+    .container {
+      max-width: 900px;
+      margin: 2rem auto 4rem auto;
+      padding: 0 1rem;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    header img {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid #c99f91;
+      margin-bottom: 1rem;
+    }
+    h1 {
+      margin-bottom: 0.5rem;
+      color: #6b4c3b;
+      user-select: none;
+    }
+    h2 {
+      font-size: 1.6rem;
+      color: #9f6b53;
+      margin-bottom: 1rem;
+      user-select: none;
+    }
+    section {
+      background-color: #ffffffcc;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+      padding: 1.5rem 2rem;
+      margin-bottom: 2rem;
+      backdrop-filter: blur(6px);
+    }
+    p {
+      line-height: 1.6;
+    }
+    ul {
+      list-style: none;
+      padding-left: 1rem;
+    }
+    ul li::before {
+      content: "•";
+      color: #c99f91;
+      display: inline-block;
+      width: 1em;
+      margin-left: -1em;
+    }
+    ul li {
+      margin-bottom: 0.7rem;
+    }
+    a {
+      color: #ba6b57;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .contact p {
+      margin: 0.5rem 0;
+    }
+    .card-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .pdf-container {
+      width: 100%;
+      max-width: 800px;
+      margin: 2rem auto;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+  
+    .pdf-container embed {
+      width: 100%;
+      height: 600px;
+      border: none;
+    }
+    
+    .skill-card {
+      background-color: #fff9f6dd;
+      border: 1px solid #e7cfc3;
+      border-radius: 16px;
+      padding: 1.2rem 1.5rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      transition: transform 0.2s ease;
+    }
+    
+    .skill-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .exp-card-container {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      max-width: 900px;
+      margin: auto;
+    }
+    
+    .exp-card {
+      background-color: #fff9f6dd; /* 與技能卡片相同半透明暖色 */
+      border: 1px solid #e7cfc3; /* 加上淡邊框 */
+      border-radius: 16px;
+      padding: 30px 25px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* 陰影調淡 */
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .exp-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1);
+    }
+        
+    .exp-card ul {
+      padding-left: 20px;
+      list-style-type: disc;
+      color: #444;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+    
+    .exp-card ul li {
+      margin-bottom: 0.8rem;
+    }
+    
+    /* footer */
+    footer {
+      text-align: center;
+      padding: 1rem 0;
+      color: #6b4c3b99;
+      user-select: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 導覽列 -->
+  <nav id="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo">
+        <img src="../images/logo.png" alt="logo" />
+      </a>
+      <div class="nav-links" id="navLinks">
+        <a href="../index.html#about">關於我</a>
+        <a href="../index.html#skills">技能</a>
+        <a href="../index.html#projects">作品</a>
+        <a href="../index.html#language">語言能力</a>
+        <a href="../index.html#experience">經歷</a>
+        <a href="../index.html#contact">聯絡我</a>
+      </div>
+      <div class="hamburger" id="hamburger">
+        <div></div><div></div><div></div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 內容主卡片 -->
+  <div class="container">
+    <section id="ai">
+      <h2>商業智慧課程 | <strong>強化資料分析與簡報表達</strong></h2>
+      <p>課程內容與學習重點</p>
+      <ul>
+        <li>學習資料蒐集、資料清洗、資料分析與視覺化的完整流程。</li>
+        <li>資料倉儲（Data Warehouse）概念：了解 OLAP、ETL 流程及 Star Schema 架構。</li>
+        <li>使用工具（如 Power BI、Tableau）將複雜數據轉為易懂圖表與儀表板。</li>
+        <li>決策支援應用案例分析：模擬企業決策情境，提出數據驅動的行動建議。</li>
+      </ul>
+      <p>工具與技能</p>
+      <ul>
+        <li>Power BI 操作：資料模型建立、DAX 函數應用、互動式儀表板製作</li>
+        <li>Excel 進階功能：樞紐分析、條件格式、圖表設計</li>
+        <li>資料前處理：清洗錯誤值、合併多表、轉換欄位型態</li>
+      </ul>
+      <p>學習成果</p>
+      <ul>
+        <li><strong>以實際開放資料（政府統計資料）進行分析，製作 BI 儀表板與決策建議書</strong></li>
+        <li><strong>根據學校教育狀況提出策略建議，強化資料驅動思維</strong></li>
+      </ul>
+
+      <p style="text-align:center; color:#888; font-size:0.95rem;">※ 本文件僅供瀏覽，請勿分享或侵占作者權益 ※</p>
+      <div class="pdf-container">
+        <embed src="../assets/bi-project.pdf" type="application/pdf" />
+      </div>
+  
+      <div class="back-link">
+        <a href="../index.html">← 返回首頁</a>
+      </div>
+    </section>
+  </div>
+
+  <!-- 漢堡選單功能 -->
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      navLinks.classList.toggle('open');
+    });
+
+    window.addEventListener('scroll', () => {
+      const navbar = document.getElementById('navbar');
+      if (window.scrollY > 20) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+  </script>
+</body>
+</html>
