@@ -1,680 +1,329 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>陳毓欣 - 個人網站</title>
-  <link rel="icon" href="images/favicon.png" type="image/png" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" />
-  <style>
-    /* Reset & 基本樣式 */
-    * {
-      box-sizing: border-box;
-    }
-    body {
-      font-family: "Segoe UI", sans-serif;
-      background: linear-gradient(90deg, #f9ece6, #f6e9de, #f7efe7);
-      margin: 0;
-      color: #333;
-      scroll-behavior: smooth;
-      padding-top: 80px; /* 避免 nav 蓋住內容 */
-      cursor: url('images/cursor.png'), auto;
-    }
-
-    html, body {
-      overflow: auto;
-      -ms-overflow-style: none;  /* IE/Edge */
-      scrollbar-width: none;     /* Firefox */
-    }
-
-    body::-webkit-scrollbar, 
-    body::-webkit-scrollbar {
-      display: none;             /* Chrome/Safari */
-    }
-
-    /* 預設游標 */
-    * {
-      cursor: url('images/cursor.png'), auto !important;
-    }
-
-    /* 導覽列 */
-    nav {
-      background-color: transparent;
-      position: fixed;
-      /*position: sticky;*/
-      top: 0;
-      width: 100%;
-      z-index: 1000;
-      transition: background-color 0.3s ease;
-      box-shadow: none;
-    }
-    nav.scrolled {
-      background-color: #d9c7bacc; /* 半透明莫蘭迪暖色 */
-      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
-    }
-    .nav-container {
-      max-width: 900px;
-      margin: auto;
-      padding: 0.8rem 1rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .nav-logo {
-      font-weight: 700;
-      font-size: 1.5rem;
-      color: #6b4c3b;
-      text-decoration: none;
-      user-select: none;
-    }
-    .nav-links {
-      display: flex;
-      gap: 1.5rem;
-    }
-    .nav-links a {
-      color: #6b4c3b;
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.3s;
-      cursor: pointer;
-    }
-    .nav-links a:hover,
-    .nav-links a.active {
-      color: #ba6b57;
-    }
-    .nav-logo img {
-      height: 50px;
-      width: auto;
-    }
-
-    /* 漢堡選單按鈕 */
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      cursor: pointer;
-    }
-    .hamburger div {
-      width: 25px;
-      height: 3px;
-      background-color: #6b4c3b;
-      border-radius: 2px;
-      transition: all 0.3s ease;
-    }
-    /* 漢堡開啟動畫 */
-    .hamburger.active div:nth-child(1) {
-      transform: rotate(45deg) translate(5px, 5px);
-    }
-    .hamburger.active div:nth-child(2) {
-      opacity: 0;
-    }
-    .hamburger.active div:nth-child(3) {
-      transform: rotate(-45deg) translate(5px, -5px);
-    }
-
-    /* 行動裝置導覽列 */
-    @media (max-width: 700px) {
-      .nav-links {
-        position: fixed;
-        top: 56px;
-        right: 0;
-        background-color: #f9ece6dd;
-        height: calc(100% - 56px);
-        width: 200px;
-        flex-direction: column;
-        padding: 2rem 1rem;
-        gap: 1rem;
-        transform: translateX(100%);
-        transition: transform 0.3s ease;
-        box-shadow: -2px 0 10px rgba(0,0,0,0.1);
-        border-radius: 0 0 0 16px;
-        z-index: 999;
-      }
-      .nav-links.open {
-        transform: translateX(0);
-      }
-      .nav-links a {
-        font-size: 1.2rem;
-        color: #6b4c3b;
-      }
-      .hamburger {
-        display: flex;
-      }
-    }
-
-    /* 容器與卡片 */
-    .container {
-      max-width: 900px;
-      margin: 2rem auto 4rem auto;
-      padding: 0 1rem;
-    }
-    header {
-      text-align: center;
-      margin-bottom: 2rem;
-    }
-    header img {
-      width: 140px;
-      height: 140px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 4px solid #c99f91;
-      margin-bottom: 1rem;
-    }
-    h1 {
-      margin-bottom: 0.5rem;
-      color: #6b4c3b;
-      user-select: none;
-    }
-    h2 {
-      font-size: 1.6rem;
-      color: #9f6b53;
-      margin-bottom: 1rem;
-      user-select: none;
-    }
-    section {
-      background-color: #ffffffcc;
-      border-radius: 16px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-      padding: 1.5rem 2rem;
-      margin-bottom: 2rem;
-      backdrop-filter: blur(6px);
-    }
-    p {
-      line-height: 1.6;
-    }
-    ul {
-      list-style: none;
-      padding-left: 1rem;
-    }
-    ul li::before {
-      content: "•";
-      color: #c99f91;
-      display: inline-block;
-      width: 1em;
-      margin-left: -1em;
-    }
-    ul li {
-      margin-bottom: 0.7rem;
-    }
-    a {
-      color: #ba6b57;
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
-    .contact p {
-      margin: 0.5rem 0;
-    }
-    .card-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1.5rem;
-    }
-    
-    .skill-card {
-      background-color: #fff9f6dd;
-      border: 1px solid #e7cfc3;
-      border-radius: 16px;
-      padding: 1.2rem 1.5rem;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-      transition: transform 0.2s ease;
-    }
-    
-    .skill-card:hover {
-      transform: translateY(-4px);
-    }
-
-    .exp-card-container {
-      display: flex;
-      flex-direction: column;
-      gap: 30px;
-      max-width: 900px;
-      margin: auto;
-    }
-    
-    .exp-card {
-      background-color: #fff9f6dd; /* 與技能卡片相同半透明暖色 */
-      border: 1px solid #e7cfc3; /* 加上淡邊框 */
-      border-radius: 16px;
-      padding: 30px 25px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* 陰影調淡 */
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .exp-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1);
-    }
-        
-    .exp-card ul {
-      padding-left: 20px;
-      list-style-type: disc;
-      color: #444;
-      font-size: 16px;
-      line-height: 1.6;
-    }
-    
-    .exp-card ul li {
-      margin-bottom: 0.8rem;
-    }
-    
-    /* footer */
-    footer {
-      text-align: center;
-      padding: 1rem 0;
-      color: #6b4c3b99;
-      user-select: none;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>陳毓欣 YuXin Chen - 個人網站</title>
+<meta name="description" content="陳毓欣，國立中央大學資訊管理研究所。系統建置、資料科學與 AI 應用。">
+<link rel="icon" href="images/favicon.png" type="image/png">
+<style>
+:root{--bg:#f6efe8;--card:#fffaf6;--ink:#3a2e28;--muted:#6f5b50;--accent:#9f4f3a;--line:#e0d0c5;--chip:#efe2d8;
+--mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+--sans:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif}
+*{box-sizing:border-box}
+html{scroll-padding-top:72px}
+@media(prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{margin:0;padding-top:64px;background:var(--bg);color:var(--ink);font:16px/1.75 var(--sans);cursor:url('images/cursor.png'),auto}
+a,button{cursor:pointer}
+a{color:var(--accent);text-underline-offset:3px}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+nav{position:fixed;top:0;left:0;right:0;z-index:10;background:#f6efeee6;backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+.bar{max-width:860px;margin:auto;padding:.4rem 1.2rem;display:flex;justify-content:space-between;align-items:center}
+.bar>a img{height:44px;display:block}
+.links{display:flex;gap:1.3rem}
+.links a{color:var(--muted);text-decoration:none;font-size:.95rem}
+.links a:hover,.links a.on{color:var(--accent)}
+.burger{display:none;background:none;border:0;font-size:1.5rem;color:var(--ink);padding:.3rem .6rem}
+main{max-width:860px;margin:auto;padding:0 1.2rem 3rem}
+header{display:flex;gap:1.6rem;align-items:center;padding:2.5rem 0 1.5rem}
+header img{width:120px;height:120px;border-radius:50%;object-fit:cover;border:3px solid var(--line)}
+h1{margin:0;font-size:2rem;line-height:1.3}
+h1 small{font-size:1rem;font-weight:400;color:var(--muted);margin-left:.5rem}
+.sub{margin:.2rem 0 .6rem;color:var(--muted)}
+.hl{margin:0;padding-left:1.1rem;font-size:.95rem}
+section{padding:2rem 0;border-top:1px solid var(--line)}
+h2{margin:0 0 1rem;font-size:1.3rem}
+h3{margin:0;font-size:1.05rem}
+p{margin:.5rem 0}
+.row{display:grid;grid-template-columns:8.5rem 1fr;gap:.5rem 1rem;padding:.7rem 0;border-bottom:1px dashed var(--line)}
+.row:last-child{border-bottom:0}
+.row dt{font-weight:700}
+.row dd{margin:0;display:flex;flex-wrap:wrap;gap:.35rem}
+.t{font:.82rem/1.5 var(--mono);background:var(--chip);border-radius:4px;padding:.1rem .5rem;white-space:nowrap}
+.g{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:1rem}
+.p{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:1.1rem 1.2rem}
+.p .k{font-size:.85rem;color:var(--accent);font-weight:700}
+.p .m{font-size:.9rem;color:var(--muted);margin:.1rem 0 .4rem}
+.p .t{margin:.2rem .3rem 0 0;display:inline-block}
+.cv{list-style:none;margin:0;padding:0}
+.cv li{padding:.15rem 0}
+.cv span{color:var(--muted);font-size:.9rem}
+.chips{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1rem}
+.chips button{font:inherit;font-size:.9rem;border:1px solid var(--line);background:var(--card);color:var(--muted);border-radius:999px;padding:.15rem .9rem}
+.chips button[aria-pressed=true]{background:var(--accent);border-color:var(--accent);color:#fff}
+.yr{margin-bottom:1.2rem}
+.yr h3{color:var(--accent);margin-bottom:.3rem}
+.yr ul{margin:0;padding-left:1.1rem}
+.yr li{padding:.12rem 0}
+.yr li span{color:var(--muted);font-size:.9rem}
+[hidden]{display:none!important}
+.contact{list-style:none;margin:0;padding:0}
+.contact li{padding:.15rem 0}
+.contact b{display:inline-block;min-width:5.5rem}
+footer{text-align:center;color:var(--muted);font-size:.9rem;padding:1.5rem 0 2rem}
+#prog{position:fixed;top:0;left:0;height:3px;width:100%;background:var(--accent);transform-origin:0 50%;transform:scaleX(0);z-index:20}
+.t{transition:background .2s,color .2s}
+.t:hover{background:var(--accent);color:#fff}
+.p{transition:border-color .2s,transform .2s}
+.p:hover{border-color:var(--accent);transform:translateY(-3px)}
+.links a{position:relative}
+.links a::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:2px;background:var(--accent);transform:scaleX(0);transition:transform .25s}
+.links a.on::after{transform:scaleX(1)}
+.caret{display:inline-block;width:2px;height:1em;background:var(--accent);margin-left:2px;vertical-align:-.15em}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}}
+@keyframes blink{50%{opacity:0}}
+@keyframes fade{from{opacity:0}}
+@media(prefers-reduced-motion:no-preference){
+header>img,header>div>*{animation:rise .7s ease-out both}
+header>div>*:nth-child(1){animation-delay:.1s}
+header>div>*:nth-child(2){animation-delay:.2s}
+header>div>*:nth-child(3){animation-delay:.3s}
+.caret{animation:blink 1s steps(1) infinite}
+.rv{opacity:0;transform:translateY(16px);transition:opacity .6s,transform .6s}
+.rv.in{opacity:1;transform:none}
+.yr li{animation:fade .35s ease-out}}
+@media(prefers-reduced-motion:reduce){.caret{display:none}#prog{display:none}}
+@media(max-width:700px){
+.burger{display:block}
+.links{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:0;background:var(--bg);border-bottom:1px solid var(--line)}
+.links.open{display:flex}
+.links a{padding:.7rem 1.2rem}
+header{flex-direction:column;align-items:flex-start}
+.row{grid-template-columns:1fr}
+.g{grid-template-columns:1fr}}
+</style>
 </head>
 <body>
-
-  <nav id="navbar">
-    <div class="nav-container">
-      <a href="" class="nav-logo">
-        <img src="images/logo.png" alt="logo" />
-      </a>
-      <div class="nav-links" id="navLinks">
-        <a href="#about" class="nav-link">關於我</a>
-        <a href="#skills" class="nav-link">技能</a>
-        <a href="#projects" class="nav-link">作品</a>
-        <a href="#language" class="nav-link">語言能力 & 證照</a>
-        <a href="#experience" class="nav-link">經歷</a>
-        <a href="#education" class="nav-link">學歷</a>
-        <a href="#contact" class="nav-link">聯絡我</a>
-      </div>
-      <div class="hamburger" id="hamburger">
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
-    </div>
-  </nav>
-
-  <div class="container">
-    <header>
-      <img src="images/avatar.jpg" alt="大頭貼" />
-      <h1>陳毓欣 YuXin Chen</h1>
-      <p>國立中央大學 | 資訊管理所</p>
-    </header>
-
-    <section id="about">
-      <h2>關於我</h2>
-      <p style="text-align: center; color: #9f6b53; font-weight: bold;">
-        活潑開朗、自律上進、熱誠待人，以持續成長為核心驅動力的跨域人才
-      </p>
-      
-      <p>
-          我是<strong>陳毓欣</strong>，來自國立中央大學資訊管理研究所。我熱衷於將資訊技術與跨領域需求結合，具備出色的系統整合思維、主動解決問題的執行力，以及深厚的公共治理與團隊協調素養。
-      </p>
-      
-      <p>
-          <strong>【公共治理與領導溝通】</strong><br>
-        於彰師大就讀時自大一即投入校務治理與學生自治，曾任學生會學權部部長、學生議會議員，並參與學校申訴評議與霸凌防治委員會。在青年發展署全國成果展中擔任解說員，帶領團隊榮獲「單冠獎」與「卓越獎」。此外，我曾擔任四門課程的教學助理（TA）及多門課程代碼，展現卓越的跨部門溝通與教學協調能力。
-      </p>
-      
-      <p>
-          <strong>【技術實作與系統建置】</strong><br>
-        具備紮實的網頁與系統架設經驗。大三下從零開始規劃並實作專題，採用 Nginx、uWSGI 與 Flask 架構成功架設 NAS 系統；亦擁有 Apache + PHP 網站建置與 Joomla CMS 架站經驗。在校園服務方面，曾協助系上建置考古題網站、校方建置新生專屬網站（ePage），並長期維護與更新學生會網站（rPage）。
-      </p>
-      
-      <p>
-          <strong>【學術研究與資料分析】</strong><br>
-        擁有良好的科學研究與邏輯分析能力。曾主持國科會大專學生研究計畫「探討元宇宙創業意向之影響因素：兼論虛擬實境教育的調節效果」，榮獲八項全 A 評定（整體表現前 20%）。同時，我亦將資料科學技術付諸實踐，於 ICIM 學術研討會發表論文「比較多種統計模型與深度學習模型於 PM2.5 預測」，展現 AI 與數據分析的實踐潛能。
-      </p>
-      
-      <p>
-          <strong>【開源社群與影音實務】</strong><br>
-        長期擔任學校 PA 工讀生，熟練掌握影像拍攝、音控操作、直播導播與剪輯製播全流程。同時積極投身開源社群，於 SITCON 與 COSCUP 擔任技術支援人員，將技術力轉化為推動公共活動與社群發展的實際行動。
-      </p>
-      
-      <p>
-          我相信，資訊技術不僅是解決問題的工具，更是推動數位治理與永續發展的核心力量。未來我期許自己在研究所階段深耕資料科學、AI 應用與系統設計，持續關注社會創新議題，成為結合理論與實務、技術與社會價值的跨域專家。
-      </p>
-    </section>
-
-    <section id="skills">
-      <h2 class="section-title">技能專長</h2>
-      <div class="card-container">
-        
-        <!-- 分類 1：資料科學與 AI 研究 -->
-        <div class="skill-card">
-          <h3>資料科學與 AI 研究</h3>
-          <ul>
-            <li><strong>程式語言：</strong>Python (資料視覺化與 AI 模型建立)</li>
-            <li><strong>AI 模型訓練：</strong>機器學習、深度學習模型評估與實作</li>
-            <li><strong>學術研究：</strong>科學研究計畫撰寫、學術論文發表</li>
-            <li><strong>統計分析：</strong>問卷設計、信效度分析、結構方程模型</li>
-          </ul>
-        </div>
-    
-        <!-- 分類 2：網頁與系統開發 -->
-        <div class="skill-card">
-          <h3>網頁與系統開發</h3>
-          <ul>
-            <li><strong>網頁前後端：</strong>HTML / CSS / JS / Bootstrap / Flask</li>
-            <li><strong>伺服器架設：</strong>Nginx / uWSGI / Apache / PHP</li>
-            <li><strong>資料庫管理：</strong>MySQL / SQL Server / SQLite / 資料表正規化</li>
-            <li><strong>CMS 系統維運：</strong>Joomla / rPage (學生會) / ePage (新生網)</li>
-            <li><strong>版本控制：</strong>Git / GitHub / GitHub Pages</li>
-          </ul>
-        </div>
-    
-        <!-- 分類 3：數位治理與專案領導 -->
-        <div class="skill-card">
-          <h3>數位治理與專案領導</h3>
-          <ul>
-            <li><strong>組織領導力：</strong>學生會、學生議會等團隊管理<strong>（平均效率提升 25%）</strong></li>
-            <li><strong>教學與協調：</strong>榮獲優良教學助理（TA），具備跨部門與教務溝通能力</li>
-            <li><strong>行政流程：</strong>校級委員會（申訴、霸凌防治）委員，具公共治理經驗</li>
-            <li><strong>專案與活動：</strong>主辦電競週等 10+ 場校內外活動策劃與主持</li>
-          </ul>
-        </div>
-    
-        <!-- 分類 4：多媒體與技術支援 -->
-        <div class="skill-card">
-          <h3>多媒體與技術支援</h3>
-          <ul>
-            <li><strong>開源社群支援：</strong>SITCON (R0副導/攝影)、COSCUP 技術支援人員</li>
-            <li><strong>多媒體實務：</strong>長期擔任校方 PA，熟練影像拍攝、音控、直播導播、後製剪輯</li>
-            <li><strong>遊戲與多媒體設計：</strong>遊戲程式設計、3D 動畫建置與裸眼 3D 渲染</li>
-          </ul>
-        </div>
-    
-      </div>
-    </section>
-    
-    <section id="projects">
-      <h2 class="section-title">作品專案</h2>
-      <div class="card-container">
-    
-        <!-- 作品 1：國科會計畫 -->
-        <div class="skill-card">
-          <div class="project-tag tag-academic">國科會計畫兼學術論文發表</div>
-          <h3>探討元宇宙創業意向之影響因素：兼論虛擬實境教育的調節效果</h3>
-          <p class="project-subtitle">第 37 屆國際資訊管理學術研討會 (ICIM 2026)</p>
-          <ul>
-            <li><strong>成果亮點：</strong>榮獲國科會大專學生研究計畫補助，評審審查獲<strong>八項全 A 評定（整體表現前 20%）</strong>。</li>
-            <li><strong>核心技術：</strong>問卷設計、信效度分析、結構方程模型 (SEM)、統計推論。</li>
-            <li><strong>專案概述：</strong>擔任計畫主持人，獨立完成文獻探討、問卷設計與發放，並運用統計模型深入分析元宇宙環境下的創業意向與 VR 教育的影響。</li>
-          </ul>
-        </div>
-    
-        <!-- 作品 2：ICIM 論文 -->
-        <div class="skill-card">
-          <div class="project-tag tag-paper">學術論文發表</div>
-          <h3>比較多種統計模型與深度學習模型於 PM2.5 預測</h3>
-          <p class="project-subtitle">第 36 屆國際資訊管理學術研討會 (ICIM 2025)</p>
-          <ul>
-            <li><strong>成果亮點：</strong>論文成功投稿並發表於國內資管界具指標性之 <strong>ICIM 學術研討會</strong>。</li>
-            <li><strong>核心技術：</strong>Python, 機器學習模型, 深度學習時間序列預測, 數據預處理。</li>
-            <li><strong>專案概述：</strong>針對空污議題，實作並比較傳統統計模型與多種深度學習模型在 PM2.5 預測上的準確度，展現優異的資料科學實踐與報告撰寫能力。</li>
-          </ul>
-        </div>
-    
-        <!-- 作品 3：AI CUP 競賽 -->
-        <div class="skill-card">
-          <div class="project-tag tag-competition">競賽獲獎</div>
-          <h3>教育部全國大專校院人工智慧競賽 (AI CUP)</h3>
-          <p class="project-subtitle">春季賽：秋季太陽能發電量預測</p>
-          <ul>
-            <li><strong>成果亮點：</strong>於全台灣 <strong>934 組參賽隊伍中脫穎而出，榮獲前 8% 排名</strong>。</li>
-            <li><strong>核心技術：</strong>Python, XGBoost, LSTM, CNN-BiLSTM, 特徵工程。</li>
-            <li><strong>專案概述：</strong>團隊合作建置預測模型，分析區域微氣候資料，透過反覆調參與融合多種機器學習及深度學習模型，成功實現高精準度的太陽能板發電量預測。</li>
-          </ul>
-        </div>
-    
-        <!-- 作品 4：大三專題 -->
-        <div class="skill-card">
-          <div class="project-tag tag-tech">系統開發</div>
-          <h3>基於網頁架構之 NAS 系統實作</h3>
-          <p class="project-subtitle">大三核心專題項目</p>
-          <ul>
-            <li><strong>成果亮點：</strong>從零開始規劃，成功在 Linux 環境建置具備網頁介面、高穩定性的<strong>私有雲網路儲存伺服器 (NAS)</strong>。</li>
-            <li><strong>核心技術：</strong>Flask, Nginx, uWSGI, HTML / CSS / JS, Linux 伺服器管理。</li>
-            <li><strong>專案概述：</strong>負責後端 API 開發與伺服器反向代理 (Reverse Proxy) 配置。透過 Nginx + uWSGI 串接 Flask 框架，成功優化系統的併發處理能力與連線穩定度。</li>
-          </ul>
-        </div>
-    
-      </div>
-    </section>
-
-    <section id="language">
-      <h2>語言能力 & 證照</h2>
-      <div class="card-container">
-        <div class="skill-card">
-          <h3>中文</h3>
-          <ul>
-            <li>繁體中文（母語）</li>
-            <li>簡體中文（可閱讀與書寫）</li>
-          </ul>
-        </div>
-        <div class="skill-card">
-          <h3>英文</h3>
-          <ul>
-            <li>TOEIC：735 分</li>
-            <li>全民英檢中級</li>
-            <li>可閱讀技術文件與進行日常溝通</li>
-          </ul>
-        </div>
-        <div class="skill-card">
-          <h3>台語</h3>
-          <ul>
-            <li>具基本溝通能力</li>
-          </ul>
-        </div>
-        <div class="skill-card">
-          <h3>IPAS 經濟部產業人才能力鑑定</h3>
-          <ul>
-            <li>AI 應用規劃師</li>
-            <li>證書號：A-J11-0646-2025</li>
-            <li>證書日期：2025/06/02</li>
-          </ul>
-        </div>
-        <div class="skill-card">
-          <h3>ERPS 中華企業資源規劃學會</h3>
-          <ul>
-            <li>BI規劃師</li>
-            <li>證書號：GP0113379598</li>
-            <li>證書日期：2025/06</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <section id="experience">
-      <h2>經歷</h2>
-      <div class="exp-card-container">
-        <!-- 2026 -->
-        <div class="exp-card">
-          <h3>2026</h3>
-          <ul>
-            <li><strong>SITCON 2026 工作人員（R0 副導＆議程助理）</strong>：製播成像組、技術支援（2026.01－2026.05）</li>
-          </ul>
-        </div>
-        
-        <!-- 2025 -->
-        <div class="exp-card">
-          <h3>2025</h3>
-          <ul>
-            <li><strong>COSCUP 2025 工作人員</strong>：技術支援與後製剪輯（2025.05－2025.10）</li>
-            <li><strong>ATCC 全國大專校院商業個案競賽</strong>：晉級初賽第一輪（2025.03－2025.04）</li>
-            <li><strong>ICIM 論文發表</strong>：比較多種統計模型與深度學習模型於 PM2.5 預測（2025.03）</li>
-            <li><strong>SITCON 2025 工作人員（R2 攝影）</strong>：製播成像組、技術支援（2025.01－2025.05）</li>
-            <li><strong>HoC 助教</strong>：協助講師指導課程、協助學生理解相關內容、維護課堂程序（2025.11－2025.12）</li>
-            <li><strong>教學助理</strong>：<a href="experience/teachingassistant1.pdf" target="_blank">人工智慧及其應用</a>、<a href="experience/teachingassistant2.pdf" target="_blank">生命探索與實踐</a>（2025.03－2025.07）</li>
-            <li><strong>學生會學權部</strong>：第二十九屆顧問（2025.08－2026.07）</li>
-            <li><strong>學生權益委員會</strong>：召集委員（2025.08－2026.07）</li>
-            <li><strong>學生議會</strong>：第二十九屆資訊管理學系系議員（2025.08－2026.07）</li>
-            <li><strong>教學助理</strong>：人工智慧及其應用（2025.09－2026.02）<strong>（榮獲優良教學助理）</strong></li>
-            <li><strong>宿舍幹部</strong>：第九宿舍女總幹事（2025.08－2026.06）</li>
-          </ul>
-        </div>
-    
-        <!-- 2024 -->
-        <div class="exp-card">
-          <h3>2024</h3>
-          <ul>
-            <li><a href="https://wcr.nstc.gov.tw/CROReview/Review/wFrmReviewForm.aspx?SRNO1=285$280$280$280$280$283$282$297$302$299$284$281$281$8170&RS_ID=69b2bff1d73242f0ad4fc10d98fa593d&SRNO2=288$281$287$280$285$282$280$282$8170" target="_blank"><strong>國科會大專學生研究計畫主持人</strong></a>：
-              探討元宇宙創業意向之影響因素：兼論虛擬實境教育的調節效果（2024.07－2026.02，八項全 A）
-            </li>
-            <li><a href="https://picopinas.im.ncue.edu.tw/" target="_blank"><strong>PicoPi 乎你知（專題）</strong></a>：自建 NAS 系統（Nginx + uWSGI + Flask）（2024.11－2026.02）</li>
-            <li><strong>學生申訴評議委員會、霸凌防治委員會</strong>：委員職務（2024.08－2025.07）</li>
-            <li><strong>學生會學權部</strong>：第28屆部長（2024.08－2025.07）</li>
-            <li><strong>系學會幹部</strong>：第24屆資訊股股長，主辦電競週與多場活動（2024.08－2025.07）</li>
-            <li><strong>宿舍幹部</strong>：宿舍樓長（2024.08－2025.07）</li>
-            <li><strong>AI CUP 2024 秋季賽</strong>：進入前 8%（2024.08－2024.10）</li>
-            <li><strong>永續黑客松競賽</strong>：獲佳作（2024.04－2024.12）</li>
-            <li><strong>學生議會</strong>：第二十七屆秘書處議事組成員（2023.08－2024.07）</li>
-            <li><strong>課程課代</strong>：電子商務、人工智慧與大數據之管理應用（2024.08－2025.07）</li>
-          </ul>
-        </div>
-    
-        <!-- 2023 -->
-        <div class="exp-card">
-          <h3>2023</h3>
-          <ul>
-            <li><strong>協助校方建置新生專屬網站</strong>：使用 ePage（2023.09－2023.12）</li>
-            <li><strong>學生會學權部</strong>：第27屆副部長 → 代理部長（2023.08－2024.07）</li>
-            <li><strong>校方 PA 工讀生</strong>：負責影像、音控、直播、導播、後製剪輯（2023－2026.06）</li>
-            <li><strong>新生輔導員</strong>：資訊管理系116級（2023.08）</li>
-            <li><strong>建置系上考古題網站</strong>：Apache + PHP、部分 HTML（2023.06－2025.06）</li>
-            <li><strong>人行道協調小組</strong>：委員職務（2023－2024）</li>
-            <li><strong>課程課代</strong>：C++、向量繪圖設計（2023.08－2024.07）</li>
-            <li><strong>學生會網站維運與更新</strong>：使用 rPage（2023.06－2025.12）</li>
-          </ul>
-        </div>
-    
-        <!-- 2022 -->
-        <div class="exp-card">
-          <h3>2022</h3>
-          <ul>
-            <li><strong>學生會學權部</strong>：第26屆部員（2022.08－2023.07）</li>
-            <li><strong>班級幹部</strong>：歷任副代表（2022.09－2026.06）</li>
-            <li><strong>系隊女排球經理</strong>：2022－2025，連續三年</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <section id="education" class="education">
-      <h2>學歷</h2>
-      <div class="card-container">
-          <div class="skill-card">
-            <h3>大學 2026.09 － 在學</h3>
-            <ul>
-              <li>資訊管理學系 研究所 | Information Management</li>
-              <li>國立中央大學 (NCU)</li>
-            </ul>
-          </div>
-          <div class="skill-card">
-            <h3>大學 2022.09 － 2026.06</h3>
-            <ul>
-              <li>資訊管理學系 本科 | Information Management</li>
-              <li>國立彰化師範大學 (NCUE)</li>
-            </ul>
-          </div>
-          <div class="skill-card">
-            <h3>高中</h3>
-            <ul>
-              <li>高雄市立高雄女子高級中學 (KGHS)</li>
-            </ul>
-          </div>
-        </div>
-    </section>
-    
-    <section id="contact" class="contact">
-      <h2>聯絡我</h2>
-        <p>
-          <i class="fas fa-envelope"></i> Email：chenyuxin821@gmail.com
-        </p>
-        <p>
-          <i class="fas fa-location-dot"></i> 居住地：臺灣高雄
-        </p>
-        <p>
-          <i class="fab fa-github"></i> GitHub：
-          <a href="https://github.com/Onyx0824" target="_blank">Onyx0824</a>
-        </p>
-        <p>
-          <i class="fab fa-github"></i> Game：
-          <a href="https://onyx0824.github.io/onyx0824Game/" target="_blank">Onyx0824</a>
-        </p>
-        <p>
-          <i class="fa-brands fa-linkedin-in"></i> LinkedIn：
-          <a href="https://www.linkedin.com/in/%E6%AF%93%E6%AC%A3-%E9%99%B3-163581387" target="_blank">陳毓欣</a>
-        </p>
-        <p>
-          <i class="fab fa-youtube"></i> YouTube：
-          <a href="https://www.youtube.com/@DaMaLab_for_Game" target="_blank">DaMa Lab</a>
-        </p>
-        <p>
-          <i class="fab fa-facebook"></i> Facebook：
-          <a href="https://www.facebook.com/onyx0824/" target="_blank">Da Ma</a>
-        </p>
-        <p>
-          <i class="fab fa-instagram"></i> Instagram：
-          <a href="https://www.instagram.com/onyx0824/" target="_blank">@onyx0824</a>
-        </p>
-        <p>
-          <i class="fa-brands fa-threads"></i> Threads：
-          <a href="https://www.threads.com/@onyx0824" target="_blank">@onyx0824</a>
-        </p>
-        <p>
-          <i class="fa-notdog fa-solid fa-cart-shopping"></i> 賣貨便
-          <a href="https://myship.7-11.com.tw/seller/profile?id=GM2603024967239" target="_blank">狸🐈</a>
-        </p>
-    </section>
+<div id="prog"></div>
+<nav>
+ <div class="bar">
+  <a href="#top" aria-label="回到頂端"><img src="images/logo.png" alt="logo"></a>
+  <button class="burger" id="burger" aria-label="開啟選單" aria-expanded="false" aria-controls="links">☰</button>
+  <div class="links" id="links">
+   <a href="#about">關於我</a><a href="#skills">技能</a><a href="#projects">作品</a><a href="#cert">語言與證照</a><a href="#experience">經歷</a><a href="#education">學歷</a><a href="#contact">聯絡我</a>
   </div>
+ </div>
+</nav>
 
-  <footer>
-    © 2026 陳毓欣 All Rights Reserved.
-  </footer>
+<main id="top">
+<header>
+ <img src="images/avatar.jpg" alt="陳毓欣的大頭貼">
+ <div>
+  <h1>陳毓欣<small>YuXin Chen</small></h1>
+  <p class="sub">國立中央大學資訊管理研究所，專注<span id="role">系統建置</span><span class="caret"></span></p>
+  <ul class="hl">
+   <li>ICIM 2025 論文：統計與深度學習模型的 PM2.5 預測比較</li>
+   <li>AI CUP 2024：934 組隊伍中進入前 8%</li>
+   <li>國科會大專學生研究計畫主持人，審查八項全 A</li>
+  </ul>
+ </div>
+</header>
 
-  <script>
-    // 漢堡選單開關
-    const hamburger = document.getElementById('hamburger');
-    const navLinks = document.getElementById('navLinks');
-    hamburger.addEventListener('click', () => {
-      hamburger.classList.toggle('active');
-      navLinks.classList.toggle('open');
-    });
+<section id="about">
+ <h2>關於我</h2>
+ <p>我畢業於國立彰化師範大學資訊管理學系，現就讀國立中央大學資訊管理研究所。大學時從學生自治遇到的實際問題出發，用系統與資料去處理：為系上建置考古題網站、協助校方建置新生專屬網站、維運學生會網站，也從零架設了自己的 NAS 系統。</p>
+ <p>研究與競賽上，我主持國科會大專學生研究計畫，發表過 PM2.5 預測論文，並用 XGBoost、LSTM 等模型做太陽能發電量預測。研究所階段，我想繼續深耕資料科學、AI 應用與系統設計。</p>
+</section>
 
-    // 導覽列滾動改變背景
-    const navbar = document.getElementById('navbar');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 30) {
-        navbar.classList.add('scrolled');
-      } else {
-        navbar.classList.remove('scrolled');
-      }
-    });
+<section id="skills">
+ <h2>技能</h2>
+ <dl style="margin:0">
+  <div class="row"><dt>資料科學與 AI</dt><dd><span class="t">Python</span><span class="t">機器學習</span><span class="t">深度學習</span><span class="t">XGBoost</span><span class="t">LSTM</span><span class="t">特徵工程</span><span class="t">問卷與信效度分析</span><span class="t">SEM</span></dd></div>
+  <div class="row"><dt>網頁與後端</dt><dd><span class="t">HTML / CSS / JS</span><span class="t">Bootstrap</span><span class="t">Flask</span><span class="t">Nginx</span><span class="t">uWSGI</span><span class="t">Apache</span><span class="t">PHP</span><span class="t">Joomla</span><span class="t">rPage</span><span class="t">ePage</span></dd></div>
+  <div class="row"><dt>資料庫與版本控制</dt><dd><span class="t">MySQL</span><span class="t">SQL Server</span><span class="t">SQLite</span><span class="t">資料表正規化</span><span class="t">Git</span><span class="t">GitHub</span><span class="t">GitHub Pages</span></dd></div>
+  <div class="row"><dt>組織與協調</dt><dd><span class="t">學生會與學生議會</span><span class="t">申訴評議、霸凌防治委員會</span><span class="t">10+ 場活動策劃</span><span class="t">優良教學助理</span></dd></div>
+  <div class="row"><dt>影音與社群</dt><dd><span class="t">SITCON</span><span class="t">COSCUP</span><span class="t">校方 PA</span><span class="t">直播導播與後製剪輯</span></dd></div>
+ </dl>
+</section>
 
-    // 滑動時導覽列連結 active 狀態
-    const sections = document.querySelectorAll('section[id]');
-    const navItems = document.querySelectorAll('.nav-link');
+<section id="projects">
+ <h2>作品</h2>
+ <div class="g">
+  <article class="p">
+   <div class="k">國科會計畫</div>
+   <h3>探討元宇宙創業意向之影響因素：兼論虛擬實境教育的調節效果</h3>
+   <div class="m">ICIM 2026（第 37 屆國際資訊管理學術研討會）</div>
+   <p>擔任計畫主持人，獨立完成文獻探討、問卷設計與發放，並以結構方程模型分析創業意向與 VR 教育的調節效果。審查獲八項全 A（整體表現前 20%）。</p>
+   <span class="t">問卷設計</span><span class="t">信效度分析</span><span class="t">SEM</span>
+  </article>
+  <article class="p">
+   <div class="k">學術論文</div>
+   <h3>比較多種統計模型與深度學習模型於 PM2.5 預測</h3>
+   <div class="m">ICIM 2025（第 36 屆國際資訊管理學術研討會）</div>
+   <p>針對空污議題，實作並比較傳統統計模型與多種深度學習時間序列模型的預測準確度，涵蓋資料前處理到模型評估。</p>
+   <span class="t">Python</span><span class="t">機器學習</span><span class="t">時間序列</span>
+  </article>
+  <article class="p">
+   <div class="k">競賽</div>
+   <h3>教育部全國大專校院人工智慧競賽（AI CUP）</h3>
+   <div class="m">2024 秋季賽：太陽能發電量預測，934 組中進入前 8%</div>
+   <p>團隊分析區域微氣候資料，透過特徵工程與反覆調參，融合多種機器學習與深度學習模型，提升發電量預測精度。</p>
+   <span class="t">XGBoost</span><span class="t">LSTM</span><span class="t">CNN-BiLSTM</span><span class="t">特徵工程</span>
+  </article>
+  <article class="p">
+   <div class="k">系統開發</div>
+   <h3><a href="https://picopinas.im.ncue.edu.tw/" target="_blank" rel="noopener">PicoPi 乎你知：基於網頁架構之 NAS 系統</a></h3>
+   <div class="m">大三起的核心專題（2024.11－2026.02）</div>
+   <p>從零規劃，在 Linux 環境建置有網頁介面的私有雲儲存伺服器。負責後端 API 與反向代理設定，以 Nginx + uWSGI 串接 Flask，改善併發處理與連線穩定度。</p>
+   <span class="t">Flask</span><span class="t">Nginx</span><span class="t">uWSGI</span><span class="t">Linux</span>
+  </article>
+ </div>
+</section>
 
-    window.addEventListener('scroll', () => {
-      let current = '';
-      sections.forEach(section => {
-        const sectionTop = section.offsetTop - 70; // 預留 navbar 高度
-        if (window.scrollY >= sectionTop) {
-          current = section.getAttribute('id');
-        }
-      });
-      navItems.forEach(link => {
-        link.addEventListener('click', () => {
-        hamburger.classList.remove('active');
-        navLinks.classList.remove('open');
-        });
-      });
-      navItems.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === '#' + current) {
-          link.classList.add('active');
-        }
-      });
-    });
-  </script>
+<section id="cert">
+ <h2>語言與證照</h2>
+ <dl style="margin:0">
+  <div class="row"><dt>語言</dt><dd>中文（母語，簡體可閱讀與書寫）、英文（TOEIC 735、全民英檢中級，可閱讀技術文件）、台語（基本溝通）</dd></div>
+  <div class="row"><dt>證照</dt><dd>IPAS AI 應用規劃師（2025/06）、ERPS BI 規劃師（2025/06）</dd></div>
+ </dl>
+</section>
 
+<section id="experience">
+ <h2>經歷</h2>
+ <div class="chips" id="chips" role="group" aria-label="依類別篩選經歷">
+  <button type="button" data-f="all" aria-pressed="true">全部</button>
+  <button type="button" data-f="tech" aria-pressed="false">技術與競賽</button>
+  <button type="button" data-f="research" aria-pressed="false">研究</button>
+  <button type="button" data-f="gov" aria-pressed="false">幹部與治理</button>
+  <button type="button" data-f="teach" aria-pressed="false">教學</button>
+  <button type="button" data-f="media" aria-pressed="false">影音與社群</button>
+ </div>
+
+ <div class="yr"><h3>2026</h3><ul>
+  <li data-t="media"><b>SITCON 2026 工作人員（R0 副導與議程助理）</b>：製播成像組、技術支援 <span>2026.01－2026.05</span></li>
+ </ul></div>
+
+ <div class="yr"><h3>2025</h3><ul>
+  <li data-t="media"><b>COSCUP 2025 工作人員</b>：技術支援與後製剪輯 <span>2025.05－2025.10</span></li>
+  <li data-t="tech"><b>ATCC 全國大專校院商業個案競賽</b>：晉級初賽第一輪 <span>2025.03－2025.04</span></li>
+  <li data-t="research"><b>ICIM 論文發表</b>：PM2.5 預測模型比較 <span>2025.03</span></li>
+  <li data-t="media"><b>SITCON 2025 工作人員（R2 攝影）</b>：製播成像組、技術支援 <span>2025.01－2025.05</span></li>
+  <li data-t="teach"><b>HoC 助教</b>：協助講師指導課程、協助學生理解內容、維護課堂程序 <span>2025.11－2025.12</span></li>
+  <li data-t="teach"><b>教學助理</b>：<a href="experience/teachingassistant1.pdf" target="_blank" rel="noopener">人工智慧及其應用</a>、<a href="experience/teachingassistant2.pdf" target="_blank" rel="noopener">生命探索與實踐</a> <span>2025.03－2025.07</span></li>
+  <li data-t="teach"><b>教學助理</b>：人工智慧及其應用，榮獲優良教學助理 <span>2025.09－2026.02</span></li>
+  <li data-t="gov"><b>學生會學權部</b>：第二十九屆顧問 <span>2025.08－2026.07</span></li>
+  <li data-t="gov"><b>學生權益委員會</b>：召集委員 <span>2025.08－2026.07</span></li>
+  <li data-t="gov"><b>學生議會</b>：第二十九屆資訊管理學系系議員 <span>2025.08－2026.07</span></li>
+  <li data-t="gov"><b>宿舍幹部</b>：第九宿舍女總幹事 <span>2025.08－2026.06</span></li>
+ </ul></div>
+
+ <div class="yr"><h3>2024</h3><ul>
+  <li data-t="research"><a href="https://wcr.nstc.gov.tw/CROReview/Review/wFrmReviewForm.aspx?SRNO1=285$280$280$280$280$283$282$297$302$299$284$281$281$8170&amp;RS_ID=69b2bff1d73242f0ad4fc10d98fa593d&amp;SRNO2=288$281$287$280$285$282$280$282$8170" target="_blank" rel="noopener"><b>國科會大專學生研究計畫主持人</b></a>：探討元宇宙創業意向之影響因素，八項全 A <span>2024.07－2026.02</span></li>
+  <li data-t="tech"><a href="https://picopinas.im.ncue.edu.tw/" target="_blank" rel="noopener"><b>PicoPi 乎你知（專題）</b></a>：自建 NAS 系統（Nginx + uWSGI + Flask） <span>2024.11－2026.02</span></li>
+  <li data-t="gov"><b>學生申訴評議委員會、霸凌防治委員會</b>：委員 <span>2024.08－2025.07</span></li>
+  <li data-t="gov"><b>學生會學權部</b>：第 28 屆部長 <span>2024.08－2025.07</span></li>
+  <li data-t="gov"><b>系學會幹部</b>：第 24 屆資訊股股長，主辦電競週與多場活動 <span>2024.08－2025.07</span></li>
+  <li data-t="gov"><b>宿舍幹部</b>：宿舍樓長 <span>2024.08－2025.07</span></li>
+  <li data-t="tech"><b>AI CUP 2024 秋季賽</b>：進入前 8% <span>2024.08－2024.10</span></li>
+  <li data-t="tech"><b>永續黑客松競賽</b>：佳作 <span>2024.04－2024.12</span></li>
+  <li data-t="gov"><b>學生議會</b>：第二十七屆秘書處議事組成員 <span>2023.08－2024.07</span></li>
+  <li data-t="teach"><b>課程課代</b>：電子商務、人工智慧與大數據之管理應用 <span>2024.08－2025.07</span></li>
+ </ul></div>
+
+ <div class="yr"><h3>2023</h3><ul>
+  <li data-t="tech"><b>協助校方建置新生專屬網站</b>：使用 ePage <span>2023.09－2023.12</span></li>
+  <li data-t="gov"><b>學生會學權部</b>：第 27 屆副部長，後代理部長 <span>2023.08－2024.07</span></li>
+  <li data-t="media"><b>校方 PA 工讀生</b>：影像、音控、直播、導播、後製剪輯 <span>2023－2026.06</span></li>
+  <li data-t="gov"><b>新生輔導員</b>：資訊管理系 116 級 <span>2023.08</span></li>
+  <li data-t="tech"><b>建置系上考古題網站</b>：Apache + PHP、HTML <span>2023.06－2025.06</span></li>
+  <li data-t="gov"><b>人行道協調小組</b>：委員 <span>2023－2024</span></li>
+  <li data-t="teach"><b>課程課代</b>：C++、向量繪圖設計 <span>2023.08－2024.07</span></li>
+  <li data-t="tech"><b>學生會網站維運與更新</b>：使用 rPage <span>2023.06－2025.12</span></li>
+ </ul></div>
+
+ <div class="yr"><h3>2022</h3><ul>
+  <li data-t="gov"><b>學生會學權部</b>：第 26 屆部員 <span>2022.08－2023.07</span></li>
+  <li data-t="gov"><b>班級幹部</b>：歷任副代表 <span>2022.09－2026.06</span></li>
+  <li data-t="gov"><b>系隊女排球經理</b>：連續三年 <span>2022－2025</span></li>
+ </ul></div>
+</section>
+
+<section id="education">
+ <h2>學歷</h2>
+ <ul class="cv">
+  <li><b>國立中央大學</b> 資訊管理學系碩士班 <span>2026.09－在學</span></li>
+  <li><b>國立彰化師範大學</b> 資訊管理學系學士 <span>2022.09－2026.06</span></li>
+  <li><b>高雄市立高雄女子高級中學</b></li>
+ </ul>
+</section>
+
+<section id="contact">
+ <h2>聯絡我</h2>
+ <ul class="contact">
+  <li><b>Email</b><a href="mailto:chenyuxin821@gmail.com">chenyuxin821@gmail.com</a></li>
+  <li><b>居住地</b>臺灣高雄</li>
+  <li><b>GitHub</b><a href="https://github.com/Onyx0824" target="_blank" rel="noopener">Onyx0824</a></li>
+  <li><b>LinkedIn</b><a href="https://www.linkedin.com/in/%E6%AF%93%E6%AC%A3-%E9%99%B3-163581387" target="_blank" rel="noopener">陳毓欣</a></li>
+  <li><b>Game</b><a href="https://onyx0824.github.io/onyx0824Game/" target="_blank" rel="noopener">Onyx0824</a></li>
+  <li><b>YouTube</b><a href="https://www.youtube.com/@DaMaLab_for_Game" target="_blank" rel="noopener">DaMa Lab</a></li>
+  <li><b>Facebook</b><a href="https://www.facebook.com/onyx0824/" target="_blank" rel="noopener">Da Ma</a></li>
+  <li><b>Instagram</b><a href="https://www.instagram.com/onyx0824/" target="_blank" rel="noopener">@onyx0824</a></li>
+  <li><b>Threads</b><a href="https://www.threads.com/@onyx0824" target="_blank" rel="noopener">@onyx0824</a></li>
+  <li><b>賣貨便</b><a href="https://myship.7-11.com.tw/seller/profile?id=GM2603024967239" target="_blank" rel="noopener">狸🐈</a></li>
+ </ul>
+</section>
+</main>
+
+<footer>© 2026 陳毓欣 All Rights Reserved.</footer>
+
+<script>
+const burger=document.getElementById('burger'),links=document.getElementById('links');
+burger.addEventListener('click',()=>{
+  const open=links.classList.toggle('open');
+  burger.setAttribute('aria-expanded',open);
+});
+links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
+  links.classList.remove('open');burger.setAttribute('aria-expanded','false');
+}));
+
+// 目前所在區塊的導覽高亮
+const navLinks=[...links.querySelectorAll('a')];
+const io=new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting){
+    navLinks.forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id));
+  }
+}),{rootMargin:'-30% 0px -60% 0px'});
+document.querySelectorAll('main section[id]').forEach(s=>io.observe(s));
+
+// 經歷分類篩選
+const btns=document.querySelectorAll('#chips button');
+btns.forEach(b=>b.addEventListener('click',()=>{
+  const f=b.dataset.f;
+  btns.forEach(x=>x.setAttribute('aria-pressed',x===b));
+  document.querySelectorAll('#experience li').forEach(li=>{
+    li.hidden=f!=='all'&&li.dataset.t!==f;
+  });
+  document.querySelectorAll('#experience .yr').forEach(y=>{
+    y.hidden=!y.querySelector('li:not([hidden])');
+  });
+}));
+// 頂端捲動進度條
+const prog=document.getElementById('prog');
+addEventListener('scroll',()=>{
+  const h=document.documentElement;
+  prog.style.transform='scaleX('+(scrollY/((h.scrollHeight-innerHeight)||1))+')';
+},{passive:true});
+
+if(!matchMedia('(prefers-reduced-motion:reduce)').matches){
+  // 區塊進入畫面時淡入
+  const rv=new IntersectionObserver(es=>es.forEach(e=>{
+    if(e.isIntersecting){e.target.classList.add('in');rv.unobserve(e.target);}
+  }),{threshold:.08});
+  document.querySelectorAll('main section').forEach(s=>{s.classList.add('rv');rv.observe(s);});
+
+  // 副標題的打字輪播
+  const roles=['系統建置','資料科學','AI 應用','後端與部署'],el=document.getElementById('role');
+  let r=0,c=roles[0].length,del=false;
+  (function tick(){
+    const w=roles[r];
+    el.textContent=w.slice(0,c);
+    let d=del?60:110;
+    if(!del&&c===w.length){del=true;d=2200;}
+    else if(del&&c===0){del=false;r=(r+1)%roles.length;d=300;}
+    else c+=del?-1:1;
+    setTimeout(tick,d);
+  })();
+}
+</script>
 </body>
 </html>
